@@ -1,0 +1,66 @@
+PAKET PEMBUNGKUS "INSTAL APLIKASI" - LAPORAN HARIAN SPPG BATU TULIS 02
+=======================================================================
+
+Fungsi paket ini:
+Apps Script tidak bisa menjadi aplikasi yang dapat diinstal. Paket ini adalah halaman
+pembungkus kecil (di GitHub Pages) yang punya tombol Instal dan ikon logo BGN, lalu
+menampilkan aplikasi Apps Script Anda di dalamnya. Database dan kode Apps Script TIDAK berubah.
+
+ISI PAKET
+- index.html             halaman pembungkus (di sini Anda mengisi alamat aplikasi)
+- manifest.webmanifest   data aplikasi (nama, warna, ikon)
+- sw.js                  service worker (syarat agar bisa diinstal)
+- icon-192.png, icon-512.png, icon-maskable-512.png   ikon Android (logo BGN)
+- apple-touch-icon.png   ikon iPhone (logo BGN)
+
+LANGKAH 1 - SIAPKAN ALAMAT APPS SCRIPT
+1. Buka Apps Script > Deploy > Manage deployments > klik ikon pensil pada deployment aktif.
+2. Pastikan "Who has access" = "Anyone" (Siapa saja). Jika memakai "Anyone with Google account",
+   pembungkus akan gagal karena halaman masuk Google tidak bisa tampil di dalam bingkai.
+3. Salin "Web app URL" (berakhiran /exec).
+
+LANGKAH 2 - ISI ALAMAT DI index.html
+1. Buka index.html dengan Notepad.
+2. Cari baris:   var APP_URL = 'GANTI_DENGAN_ALAMAT_EXEC_ANDA';
+3. Ganti tulisan di antara tanda kutip dengan alamat /exec tadi. Simpan.
+
+LANGKAH 3 - UNGGAH KE GITHUB PAGES (gratis)
+1. Buat akun di github.com (jika belum punya) dan masuk.
+2. Klik tombol + > New repository. Nama: sppg-batu-tulis-02. Pilih Public. Klik Create repository.
+3. Klik "uploading an existing file". Seret SEMUA file isi paket (bukan file zip-nya) lalu klik Commit changes.
+4. Buka Settings > Pages. Pada "Build and deployment" pilih Source: Deploy from a branch,
+   Branch: main, folder: / (root). Klik Save.
+5. Tunggu 1-3 menit. Alamatnya muncul di atas halaman Pages:
+   https://NAMAANDA.github.io/sppg-batu-tulis-02/
+
+LANGKAH 4 - INSTAL DI HP
+Android (Chrome):
+1. Buka alamat GitHub Pages di atas.
+2. Ketuk menu titik tiga > "Instal aplikasi" (atau "Tambahkan ke layar utama" lalu pilih Instal).
+3. Ikon logo BGN muncul di layar utama dan aplikasi terbuka layar penuh.
+iPhone (Safari):
+1. Buka alamat yang sama di Safari.
+2. Ketuk tombol Bagikan > "Tambah ke Layar Utama".
+
+PEMBARUAN
+- Jika Anda memperbarui kode Apps Script: buat New version pada deployment yang SAMA (alamat /exec
+  tidak berubah). Semua HP langsung memakai versi baru tanpa pasang ulang.
+- Jika alamat /exec berganti atau ikon diganti: ubah file di GitHub (ikon pensil > Commit).
+  Ikon di HP yang sudah terpasang mungkin perlu dihapus dan dipasang ulang.
+
+UJI SETELAH DIPASANG (lakukan di satu HP dulu)
+[ ] Login dan logout
+[ ] Isi laporan harian dan unggah foto (kamera dan galeri)
+[ ] Absensi relawan
+[ ] Cetak / pratinjau slip gaji
+[ ] Ekspor file (CSV) bila dipakai
+[ ] Buka ulang aplikasi dari ikon setelah ditutup
+
+JIKA LAYAR KOSONG ATAU ADA PESAN DARI GOOGLE
+- Cek lagi Langkah 1 (akses harus "Anyone").
+- Cek alamat APP_URL: harus utuh, diawali https://script.google.com/ dan berakhiran /exec.
+- Sambil menunggu perbaikan, aplikasi tetap bisa dipakai lewat alamat /exec langsung seperti biasa.
+
+CATATAN
+- Aplikasi tetap butuh internet. Sesi login berlaku 6 jam, lalu login lagi.
+- Jangan gunakan kembali kode PWA lama di doGet/HTML: tidak berpengaruh pada Apps Script.
